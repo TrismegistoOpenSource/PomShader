@@ -1,0 +1,32 @@
+schema_version = "1.0.0"
+
+id = "pom_shader"
+version = "1.0.0"
+name = "POM Shader"
+tagline = "Parallax occlusion mapping with native shader nodes"
+maintainer = "TrismegistoOpenSource"
+type = "add-on"
+
+website = "https://github.com/TrismegistoOpenSource/PomShader"
+
+tags = ["Material", "Node", "Render"]
+
+blender_version_min = "5.1.0"
+
+license = [
+  "SPDX:GPL-3.0-or-later",
+]
+
+copyright = [
+  "2026 TrismegistoOpenSource",
+]
+
+[permissions]
+files = "Writes precomputed EXR maps next to the blend file"
+
+[build]
+paths_exclude_pattern = [
+  "__pycache__/",
+  "/.git/",
+  "*.zip",
+]

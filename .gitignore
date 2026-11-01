@@ -1,0 +1,15 @@
+# Generati: bytecode, zip dell'estensione (tools/pacchetto.py li scrive in ../build o in dist/)
+__pycache__/
+*.pyc
+dist/
+*.zip
+*.zip.tmp
+.DS_Store
+# modelli fotogrammetrici di prova: restano sul disco di chi prova
+tests/assets/real/
+# strumenti di prova e di pubblicazione: restano nel workspace, non nel repository
+tests/
+scripts/
+tools/build.py
+tools/run_unit_tests.py
+tools/run_blender_tests.py

@@ -1,0 +1,49 @@
+name: Release POM Shader
+
+on:
+  push:
+    tags: ["v*"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build the extension zip
+        run: python3 tools/pacchetto.py dist
+
+      - name: Tag matches the manifest version
+        run: |
+          v="$(sed -n 's/^version = "\([^"]*\)"/\1/p' pom_shader/blender_manifest.toml)"
+          [ "v$v" = "$GITHUB_REF_NAME" ] || { echo "tag $GITHUB_REF_NAME, manifest $v"; exit 1; }
+          ls -la "dist/pom_shader-$v.zip"
+
+      - name: Checksums (SHA-256)
+        run: |
+          cd dist
+          sha256sum ./*.zip | sed 's|  \./|  |' > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+
+      - uses: softprops/action-gh-release@v3
+        with:
+          files: |
+            dist/*.zip
+            dist/SHA256SUMS.txt
+          prerelease: false
+          make_latest: "true"
+          body: |
+            Extension for Blender 5.1 or later (macOS, Windows, Linux).
+
+            **Install:** download the `pom_shader-…` zip below and drag it into the Blender window, or
+            Preferences → Extensions → Install from Disk. Guide: `docs/USER_GUIDE.md`.
+
+            `SHA256SUMS.txt` lists the SHA-256 of the zip; `SHA256SUMS.txt.sig` (uploaded after the release) is the
+            publisher's signature, which CentralHub checks before archiving.

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="$lang">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>$title</title>
+<style>
+  :root { --fg: #1d1d1f; --muted: #5f6368; --line: #d7d7db; --bg: #ffffff; --panel: #f6f6f8; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fg: #ececef; --muted: #a3a3aa; --line: #3a3a40; --bg: #18181b; --panel: #222226; }
+  }
+  body { font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--fg); background: var(--bg);
+         margin: 0 auto; max-width: 980px; padding: 24px 16px 64px; }
+  h1 { font-size: 1.5rem; margin-bottom: 0.2rem; }
+  h2 { margin-top: 2.2rem; border-bottom: 1px solid var(--line); padding-bottom: 0.3rem; }
+  h3 { font-size: 1rem; margin: 1.2rem 0 0.4rem; }
+  .scope { background: var(--panel); border-left: 4px solid #b40426; padding: 10px 14px; }
+  .muted { color: var(--muted); }
+  table { border-collapse: collapse; font-variant-numeric: tabular-nums; margin: 4px 0 8px; }
+  td { border-bottom: 1px solid var(--line); padding: 3px 14px 3px 0; }
+  td:first-child { color: var(--muted); }
+  img { max-width: 100%; image-rendering: pixelated; border: 1px solid var(--line); }
+  .legend { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+  .bar { height: 12px; width: 280px; border: 1px solid var(--line);
+         background: linear-gradient(90deg, #3b4cc0, #f2f2f2, #b40426); }
+  .view { display: inline-block; vertical-align: top; width: 300px; margin-right: 16px; }
+  svg text { fill: var(--fg); }
+</style>
+</head>
+<body>
+<h1>$title</h1>
+<p class="muted">$intro</p>
+<p class="scope"><b>$scope_label</b> $scope</p>
+
+<h2>$h_e1</h2>
+<p class="muted">$p_e1</p>
+$e1
+<h3>$h_heat</h3>
+<div class="legend"><span>−$heat_limit mm</span><span class="bar"></span><span>+$heat_limit mm</span></div>
+<img src="data:image/png;base64,$heat" alt="heatmap E1">
+
+<h2>$h_e2</h2>
+<p class="muted">$p_e2</p>
+$e2
+
+<h2>$h_e3</h2>
+$e3
+
+<h2>$h_params</h2>
+$params
+</body>
+</html>
